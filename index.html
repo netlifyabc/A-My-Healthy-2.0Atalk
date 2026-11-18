@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<title>母亲耳朵疼痛、眼睛胀痛与咽喉护理 | Gemini Conversation</title>
+
+<style>
+:root {
+    --background: #ffffff;
+    --surface: #ffffff;
+    --text: #202124;
+    --secondary: #5f6368;
+    --muted: #9aa0a6;
+    --border: #e8eaed;
+    --user-bg: #f0f4f9;
+    --accent: #4285f4;
+    --content-width: 820px;
+    --sidebar-width: 68px;
+
+    --page-padding: 32px;
+    --mobile-padding: 16px;
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+
+    font-family:
+        "Google Sans",
+        "Helvetica Neue",
+        Arial,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+
+    font-size: 15px;
+    line-height: 1.85;
+
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    height: 64px;
+
+    padding:
+        0 max(32px, env(safe-area-inset-right))
+        0 max(32px, env(safe-area-inset-left));
+
+    border-bottom: 1px solid #f0f0f0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255,255,255,.96);
+
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.3px;
+
+    min-width: 0;
+}
+
+.brand-icon {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.brand-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+.topbar-right {
+    color: #80868b;
+    font-size: 12px;
+    letter-spacing: .2px;
+    white-space: nowrap;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 100%;
+    max-width: 1060px;
+
+    margin: 0 auto;
+
+    padding: 50px var(--page-padding) 90px;
+}
+
+.conversation-title {
+    max-width: var(--content-width);
+
+    margin: 0 auto 44px;
+}
+
+.conversation-title h1 {
+    font-size: clamp(23px, 3vw, 28px);
+    line-height: 1.45;
+
+    font-weight: 650;
+    letter-spacing: -.8px;
+
+    margin: 0 0 12px;
+}
+
+.conversation-title p {
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.8;
+
+    margin: 0;
+}
+
+/* =========================
+   CONVERSATION
+========================= */
+
+.conversation {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 36px;
+}
+
+.message {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+}
+
+/* =========================
+   USER MESSAGE
+========================= */
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.user-panel {
+    width: 100%;
+    max-width: 790px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    min-width: 0;
+}
+
+.user-card {
+    width: 100%;
+    max-width: 760px;
+
+    position: relative;
+
+    background: var(--user-bg);
+
+    border-radius: 21px;
+
+    padding: 21px 25px 9px;
+
+    overflow: hidden;
+
+    transition:
+        background .2s ease,
+        border-radius .2s ease;
+}
+
+.user-card:hover {
+    background: #edf2f8;
+}
+
+.user-content {
+    width: 100%;
+    min-width: 0;
+
+    max-height: 3.7em;
+    overflow: hidden;
+
+    transition:
+        max-height .4s cubic-bezier(.2,.7,.2,1);
+}
+
+.user-card:not(.expanded) .user-content {
+    max-height: 3.7em;
+}
+
+.user-card:not(.expanded)
+.user-content p:first-child {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    line-clamp: 2;
+
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.user-card:not(.expanded)
+.user-content > p:not(:first-child),
+.user-card:not(.expanded)
+.user-content > hr,
+.user-card:not(.expanded)
+.user-content > .file-tree {
+    display: none;
+}
+
+.user-card.expanded .user-content {
+    max-height: 30000px;
+    overflow: visible;
+}
+
+.user-card.expanded
+.user-content p:first-child {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+
+    overflow: visible;
+    margin-bottom: 16px;
+}
+
+.user-card.expanded {
+    padding-bottom: 5px;
+}
+
+/* =========================
+   USER TOGGLE
+========================= */
+
+.user-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 34px;
+
+    padding: 0;
+    margin: 2px 0 0 auto;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+    color: #5f6368;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    transition: background .2s ease;
+
+    position: relative;
+    z-index: 2;
+
+    touch-action: manipulation;
+}
+
+.user-toggle:hover {
+    background: rgba(60,64,67,.09);
+}
+
+.user-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.user-toggle svg {
+    width: 20px;
+    height: 20px;
+
+    transition: transform .3s ease;
+}
+
+.user-card.expanded .user-toggle svg {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   GEMINI LAYOUT
+========================= */
+
+.message.gemini {
+    display: grid;
+
+    grid-template-columns:
+        var(--sidebar-width)
+        minmax(0,1fr);
+
+    align-items: stretch;
+    gap: 15px;
+}
+
+.gemini-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+
+    padding-top: 4px;
+}
+
+.gemini-rail::after {
+    content: "";
+
+    width: 1px;
+    flex: 1;
+
+    min-height: 40px;
+    margin-top: 18px;
+
+    background: linear-gradient(
+        to bottom,
+        #e8eaed,
+        #f5f6f7
+    );
+}
+
+.gemini-logo {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f8f9fa;
+    border: 1px solid #f0f1f3;
+
+    flex-shrink: 0;
+}
+
+.gemini-logo svg {
+    width: 25px;
+    height: 25px;
+}
+
+.gemini-rail-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+    margin-top: 17px;
+
+    color: #73777c;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* =========================
+   GEMINI CONTENT
+========================= */
+
+.gemini-main {
+    min-width: 0;
+    max-width: var(--content-width);
+
+    padding: 0 5px 0 0;
+}
+
+.gemini-heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    min-height: 32px;
+}
+
+.gemini-heading-name {
+    color: #5f6368;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gemini-heading-divider {
+    width: 1px;
+    height: 13px;
+
+    background: #dadce0;
+}
+
+.gemini-heading-type {
+    color: #9aa0a6;
+    font-size: 11px;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+p {
+    margin: 0 0 16px;
+}
+
+h2 {
+    font-size: 19px;
+    line-height: 1.55;
+
+    font-weight: 650;
+    letter-spacing: -.35px;
+
+    margin: 35px 0 16px;
+}
+
+h3 {
+    font-size: 16px;
+    line-height: 1.6;
+
+    font-weight: 600;
+
+    margin: 25px 0 12px;
+}
+
+strong {
+    font-weight: 700;
+    color: inherit;
+}
+
+ul,
+ol {
+    padding-left: 24px;
+    margin: 12px 0 21px;
+}
+
+li {
+    padding-left: 4px;
+    margin-bottom: 9px;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 12px 19px;
+
+    border-left: 3px solid #dadce0;
+
+    color: #5f6368;
+    background: #fafafa;
+
+    border-radius: 0 8px 8px 0;
+}
+
+code {
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size: .88em;
+
+    background: #f1f3f4;
+
+    padding: 3px 6px;
+    border-radius: 5px;
+
+    color: #3c4043;
+
+    overflow-wrap: anywhere;
+}
+
+pre {
+    max-width: 100%;
+
+    background: #f8f9fa;
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    padding: 17px;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+
+    white-space: pre;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+
+    margin: 28px 0;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    margin: 20px 0;
+
+    -webkit-overflow-scrolling: touch;
+
+    border-radius: 9px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    font-size: 13px;
+    line-height: 1.75;
+
+    min-width: 560px;
+}
+
+th,
+td {
+    border: 1px solid var(--border);
+
+    padding: 12px;
+
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    max-width: var(--content-width);
+
+    text-align: center;
+
+    color: #9aa0a6;
+    font-size: 12px;
+
+    margin: 80px auto 0;
+    padding-top: 23px;
+
+    border-top: 1px solid var(--border);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+    :root {
+        --sidebar-width: 42px;
+    }
+
+    main {
+        padding: 38px 22px 70px;
+    }
+
+    .topbar {
+        padding: 0 22px;
+    }
+
+    .conversation-title h1 {
+        font-size: 25px;
+    }
+
+    .message.gemini {
+        gap: 11px;
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 640px) {
+
+    :root {
+        --sidebar-width: 31px;
+    }
+
+    html {
+        scroll-padding-top: 65px;
+    }
+
+    body {
+        font-size: 15px;
+        line-height: 1.85;
+    }
+
+    /* 顶部导航 */
+
+    .topbar {
+        height: 56px;
+
+        padding-left:
+            max(15px, env(safe-area-inset-left));
+
+        padding-right:
+            max(15px, env(safe-area-inset-right));
+
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 9px;
+        font-size: 14px;
+    }
+
+    .brand-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .brand-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    .topbar-right {
+        font-size: 10px;
+        letter-spacing: 0;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 主体区域 */
+
+    main {
+        padding:
+            30px
+            max(15px, env(safe-area-inset-right))
+            55px
+            max(15px, env(safe-area-inset-left));
+    }
+
+    .conversation-title {
+        margin-bottom: 31px;
+    }
+
+    .conversation-title h1 {
+        font-size: 23px;
+        line-height: 1.48;
+
+        letter-spacing: -.5px;
+
+        margin-bottom: 10px;
+    }
+
+    .conversation-title p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    /* 对话间距 */
+
+    .conversation {
+        gap: 29px;
+    }
+
+    /* 用户消息 */
+
+    .user-panel {
+        max-width: 100%;
+    }
+
+    .user-card {
+        padding: 16px 17px 7px;
+
+        border-radius: 18px;
+    }
+
+    .user-content {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .user-toggle {
+        width: 40px;
+        height: 35px;
+
+        margin-top: 3px;
+    }
+
+    .user-card.expanded {
+        padding-bottom: 5px;
+    }
+
+    /* Gemini 侧边栏 */
+
+    .message.gemini {
+        grid-template-columns:
+            var(--sidebar-width)
+            minmax(0,1fr);
+
+        gap: 9px;
+    }
+
+    .gemini-rail {
+        padding-top: 3px;
+    }
+
+    .gemini-logo {
+        width: 31px;
+        height: 31px;
+
+        border-radius: 10px;
+    }
+
+    .gemini-logo svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .gemini-rail-label {
+        margin-top: 13px;
+
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .gemini-rail::after {
+        margin-top: 13px;
+    }
+
+    /* Gemini 正文 */
+
+    .gemini-main {
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .gemini-heading {
+        min-height: 29px;
+        gap: 8px;
+
+        margin-bottom: 17px;
+    }
+
+    .gemini-heading-name {
+        font-size: 12px;
+    }
+
+    .gemini-heading-type {
+        font-size: 10px;
+    }
+
+    /* 手机端文字 */
+
+    .gemini-main p {
+        font-size: 14px;
+        line-height: 1.9;
+
+        margin-bottom: 15px;
+
+        overflow-wrap: anywhere;
+    }
+
+    h2 {
+        font-size: 17px;
+        line-height: 1.55;
+
+        margin: 28px 0 13px;
+
+        letter-spacing: -.2px;
+    }
+
+    h3 {
+        font-size: 15px;
+        margin: 22px 0 10px;
+    }
+
+    ul,
+    ol {
+        padding-left: 21px;
+        margin: 10px 0 18px;
+    }
+
+    li {
+        font-size: 14px;
+        line-height: 1.85;
+
+        padding-left: 2px;
+        margin-bottom: 8px;
+    }
+
+    li li {
+        font-size: 13.5px;
+    }
+
+    blockquote {
+        padding: 11px 14px;
+        margin: 17px 0;
+
+        font-size: 14px;
+    }
+
+    /* 表格 */
+
+    .table-wrap {
+        margin: 17px 0;
+
+        border-radius: 8px;
+    }
+
+    table {
+        min-width: 530px;
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    /* 代码 */
+
+    pre {
+        padding: 13px;
+
+        font-size: 12px;
+        line-height: 1.7;
+
+        border-radius: 9px;
+    }
+
+    code {
+        font-size: .86em;
+    }
+
+    /* 分隔线 */
+
+    hr {
+        margin: 23px 0;
+    }
+
+    /* 页脚 */
+
+    .footer {
+        margin-top: 52px;
+        padding-top: 19px;
+
+        font-size: 11px;
+        line-height: 1.7;
+    }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+    main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .topbar {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .topbar-right {
+        max-width: 105px;
+    }
+
+    .conversation-title h1 {
+        font-size: 21px;
+    }
+
+    .message.gemini {
+        gap: 7px;
+    }
+
+    .gemini-main p {
+        font-size: 13.5px;
+    }
+
+    .user-card {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .topbar {
+        position: relative;
+    }
+
+    main {
+        padding-top: 25px;
+    }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    body {
+        color: #000;
+        background: #fff;
+    }
+
+    .topbar {
+        position: static;
+        backdrop-filter: none;
+    }
+
+    .user-content {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .user-content p:first-child {
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        line-clamp: unset !important;
+    }
+
+    .user-content > p,
+    .user-content > hr,
+    .user-content > .file-tree {
+        display: block !important;
+    }
+
+    .user-toggle {
+        display: none;
+    }
+
+    .message {
+        break-inside: avoid;
+    }
+
+    .gemini-rail::after {
+        display: none;
+    }
+
+    .table-wrap,
+    pre {
+        overflow: visible;
+    }
+
+    table {
+        min-width: 0;
+    }
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <svg viewBox="0 0 48 48"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <path fill="#4285F4"
+                d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+
+                <path fill="#34A853"
+                d="M24 44c5.4 0 10-1.8 13.4-4.8l-6.7-5.1c-1.8 1.2-4 1.9-6.7 1.9-5.1 0-9.4-3.4-10.9-8H6.2v5.3A20 20 0 0 0 24 44z"/>
+
+                <path fill="#FBBC05"
+                d="M13.1 28a12 12 0 0 1 0-7.9v-5.3H6.2a20 20 0 0 0 0 18.5l6.9-5.3z"/>
+
+                <path fill="#EA4335"
+                d="M24 12.1c2.9 0 5.5 1 7.5 3l5.7-5.7C33.7 6.1 29.3 4 24 4A20 20 0 0 0 6.2 14.8l6.9 5.3c1.5-4.6 5.8-8 10.9-8z"/>
+
+            </svg>
+        </div>
+
+        <span>Gemini Conversation</span>
+
+    </div>
+
+    <div class="topbar-right">
+        Personal Conversation Archive
+    </div>
+
+</header>
+
+<main>
+
+<section class="conversation-title">
+
+    <h1>母亲耳朵疼痛、眼睛胀痛与咽喉护理</h1>
+
+    <p>
+        家庭健康记录 · 耳部疾病排查 · 眼部疼痛 · 咽喉护理与润喉方案
+    </p>
+
+</section>
+
+<div class="conversation">
+
+<!-- USER MESSAGE 1 -->
+
+<section class="message user">
+
+<div class="user-panel">
+
+<div class="user-card">
+
+<div class="user-content">
+
+<p>你 分析 一下</p>
+
+<p>我 母亲 前几天</p>
+
+<p>耳朵 有点 神经疼</p>
+
+<p>后来 嗓子疼</p>
+
+<p>去 医院 也 打了 点滴，</p>
+
+<p>现在 还没确定是 耳朵 芥肿 还是 带状疱疹</p>
+
+<p>然后 嗓子疼 喝 胖大海 泡水 合适？</p>
+
+<p>怎么 喝 一次 泡 多少？</p>
+
+</div>
+
+<button class="user-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-label="展开完整消息">
+
+<svg viewBox="0 0 24 24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path d="m6 9 6 6 6-6"/>
+
+</svg>
+
+</button>
+
+</div>
+</div>
+</section>
+
+<!-- GEMINI RESPONSE 1 -->
+
+<section class="message gemini">
+
+<aside class="gemini-rail">
+
+<div class="gemini-logo">
+
+<svg viewBox="0 0 48 48"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <path fill="#4285F4"
+    d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+
+    <path fill="#34A853"
+    d="M24 44c5.4 0 10-1.8 13.4-4.8l-6.7-5.1c-1.8 1.2-4 1.9-6.7 1.9-5.1 0-9.4-3.4-10.9-8H6.2v5.3A20 20 0 0 0 24 44z"/>
+
+    <path fill="#FBBC05"
+    d="M13.1 28a12 12 0 0 1 0-7.9v-5.3H6.2a20 20 0 0 0 0 18.5l6.9-5.3z"/>
+
+    <path fill="#EA4335"
+    d="M24 12.1c2.9 0 5.5 1 7.5 3l5.7-5.7C33.7 6.1 29.3 4 24 4A20 20 0 0 0 6.2 14.8l6.9 5.3c1.5-4.6 5.8-8 10.9-8z"/>
+
+</svg>
+
+</div>
+
+<span class="gemini-rail-label">GEMINI</span>
+
+</aside>
+
+<div class="gemini-main">
+
+<div class="gemini-heading">
+
+<span class="gemini-heading-name">Gemini</span>
+
+<span class="gemini-heading-divider"></span>
+
+<span class="gemini-heading-type">AI Response</span>
+
+</div>
+
+<p>你母亲目前先明确耳朵的病因比喝胖大海更重要。耳朵疼痛继发嗓子疼，既可能是局部感染扩散，也可能是耳部带状疱疹（Ramsay Hunt综合征）沿颅神经引起的牵涉痛，胖大海只能对部分急性咽喉肿痛起辅助舒缓作用，不能替代对因治疗。</p>
+
+<h2>一、 病情分析：外耳道疖肿 vs 耳部带状疱疹</h2>
+
+<p>耳朵和咽喉有共同的神经分支支配（如迷走神经、舌咽神经），一处病变很容易牵涉到另一处。这两种情况的处理方式完全不同，建议密切观察以下特征：</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>对比维度</th>
+<th>外耳道疖肿（细菌感染）</th>
+<th>耳部带状疱疹（病毒感染）</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>疼痛特点</td>
+<td>局部红肿胀痛，按压耳屏或牵拉耳廓时疼痛明显加重。</td>
+<td>阵发性针刺样、电击样或烧灼样剧痛，摸不摸耳朵都可能阵阵抽痛。</td>
+</tr>
+
+<tr>
+<td>皮肤表现</td>
+<td>耳道内单个红肿硬结，成熟后可能有脓点。</td>
+<td>疼痛几天后，耳廓、外耳道甚至软腭咽部可能出现成簇的小水疱。</td>
+</tr>
+
+<tr>
+<td>神经症状</td>
+<td>一般无神经功能异常。</td>
+<td>若病毒累及面神经或听神经，可能出现嘴角歪斜、眼睛闭不严、耳鸣、听力下降或头晕。</td>
+</tr>
+
+<tr>
+<td>治疗核心</td>
+<td>抗生素抗感染、局部消炎止痛。</td>
+<td>尽早抗病毒治疗（黄金窗口期通常在发病72小时内）及营养神经药物。</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<ul>
+<li>就医提醒：如果正在打点滴（通常是抗生素），但耳朵依然是针刺样的神经痛，或者出现了水疱、面部表情不对称、眩晕，务必尽快去耳鼻喉科复查，以免错过抗病毒的最佳时机。</li>
+</ul>
+
+<h2>二、 嗓子疼喝胖大海合适吗？</h2>
+
+<p>可以短期辅助饮用，但需看清情况和体质。</p>
+
+<ul>
+
+<li><strong>合适的情况：</strong>如果嗓子疼表现为干痛、红肿、吞咽不适或声音嘶哑（类似急性咽炎或扁桃体炎的“肺热”表现），胖大海有清热润肺、利咽开音的作用，喝了会比较舒服。</li>
+
+<li><strong>不合适的情况：</strong>
+
+<ul>
+
+<li>如果是带状疱疹引起的咽喉疼痛：说明病毒可能波及了咽部神经或黏膜，胖大海只能稍微湿润喉咙，无法抑制病毒，不能指望靠它治好。</li>
+
+<li>体质虚寒者慎用：胖大海药性偏寒，如果母亲平时脾胃虚弱、容易拉肚子、怕冷，或者伴有低血压、糖尿病（胖大海含一定糖分且有轻微降压作用），都不建议喝，否则容易引起腹泻或头晕。</li>
+
+</ul>
+</li>
+
+</ul>
+
+<h2>三、 胖大海怎么喝？</h2>
+
+<p>如果母亲没有上述禁忌，想用来临时润嗓，建议在医生指导下规范冲泡：</p>
+
+<ul>
+
+<li>冲泡方法：用沸水冲泡，盖上杯盖焖置，等果皮完全裂开、膨大成海绵状后，放至温热再小口慢饮。日常可根据医生建议调整饮用量。</li>
+
+<li>饮用周期：不宜长期连续饮用。胖大海属于中药材，不宜当成日常保健茶长期饮用，一旦嗓子疼缓解或症状无改善就应停用并及时就医。</li>
+
+<li>日常护嗓替代：如果体质偏寒不适合喝胖大海，用温淡盐水漱口、多喝温开水，或者含服医生开具的润喉片，也是安全有效的缓解方式。</li>
+
+</ul>
+
+<p>为了更准确地帮你判断情况，你可以补充一下：</p>
+
+<ul>
+
+<li>医生目前点滴里用的是抗生素还是抗病毒药物？</li>
+
+<li>母亲的耳朵周围或嘴里有没有看到小水疱，或者出现耳鸣、头晕的情况？</li>
+
+</ul>
+
+<p>告诉我这些细节，我可以帮你进一步梳理复诊时需要注意的重点。</p>
+
+</div>
+</section>
+
+<!-- USER MESSAGE 2 -->
+
+<section class="message user">
+
+<div class="user-panel">
+
+<div class="user-card">
+
+<div class="user-content">
+
+<p>但是 前几天 说</p>
+
+<p>耳朵 疼 眼睛 疼</p>
+
+<p>打3天 点滴 眼睛 没那么 疼</p>
+
+<p>之前 有点 一胀 一 胀疼</p>
+
+<p>可能是 怎么回事 ？</p>
+
+</div>
+
+<button class="user-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-label="展开完整消息">
+
+<svg viewBox="0 0 24 24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path d="m6 9 6 6 6-6"/>
+
+</svg>
+
+</button>
+
+</div>
+</div>
+</section>
+
+<!-- GEMINI RESPONSE 2 -->
+
+<section class="message gemini">
+
+<aside class="gemini-rail">
+
+<div class="gemini-logo">
+
+<svg viewBox="0 0 48 48"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <path fill="#4285F4"
+    d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+
+    <path fill="#34A853"
+    d="M24 44c5.4 0 10-1.8 13.4-4.8l-6.7-5.1c-1.8 1.2-4 1.9-6.7 1.9-5.1 0-9.4-3.4-10.9-8H6.2v5.3A20 20 0 0 0 24 44z"/>
+
+    <path fill="#FBBC05"
+    d="M13.1 28a12 12 0 0 1 0-7.9v-5.3H6.2a20 20 0 0 0 0 18.5l6.9-5.3z"/>
+
+    <path fill="#EA4335"
+    d="M24 12.1c2.9 0 5.5 1 7.5 3l5.7-5.7C33.7 6.1 29.3 4 24 4A20 20 0 0 0 6.2 14.8l6.9 5.3c1.5-4.6 5.8-8 10.9-8z"/>
+
+</svg>
+
+</div>
+
+<span class="gemini-rail-label">GEMINI</span>
+
+</aside>
+
+<div class="gemini-main">
+
+<div class="gemini-heading">
+
+<span class="gemini-heading-name">Gemini</span>
+
+<span class="gemini-heading-divider"></span>
+
+<span class="gemini-heading-type">AI Response</span>
+
+</div>
+
+<p>结合“前几天耳朵疼、眼睛一胀一胀地疼，现在又有嗓子疼，且输液3天后眼睛疼痛明显减轻”这些线索来看，三叉神经痛/神经炎症反应或邻近器官的急性感染波及（如急性鼻窦炎、中耳炎或带状疱疹早期）的可能性最大。</p>
+
+<p>打点滴后症状有所缓解，说明当前的抗感染或抗炎治疗对症，但也需要警惕几种特定情况：</p>
+
+<h2>一、 为什么会“耳朵疼 + 眼睛一胀一胀疼 + 嗓子疼”？</h2>
+
+<p>头面部的神经和血管分布非常密集，很多区域由同一组颅神经（尤其是三叉神经）支配，而且鼻、咽、耳通过咽鼓管和鼻窦紧密相连：</p>
+
+<ul>
+
+<li><strong>三叉神经受到刺激（带状疱疹早期或神经炎）</strong>
+
+<ul>
+
+<li>表现特点：三叉神经的分支同时管着眼睛周围、耳朵前方以及口腔咽喉的感觉。如果潜伏的病毒（如水痘-带状疱疹病毒）激活，在还没长出典型水疱的头几天，就会引起沿神经分布的阵发性胀痛、跳痛或刺痛。</li>
+
+<li>输液反应：如果点滴中加入了抗病毒药、消炎止痛药或营养神经的药物，神经水肿减轻后，眼睛的胀痛感就会明显缓解。</li>
+
+</ul>
+</li>
+
+<li><strong>急性细菌感染及周围扩散（如外耳道疖肿、急性中耳炎或鼻窦炎）</strong>
+
+<ul>
+
+<li>表现特点：严重的耳道疖肿或中耳炎，局部压力升高会出现一跳一跳的胀痛，这种疼痛会顺着神经放射到同侧的太阳穴和眼眶，同时炎症往下蔓延引起咽喉疼痛。</li>
+
+<li>输液反应：如果输的是抗生素，随着细菌被控制、局部肿胀消退，眼眶的放射痛自然会先减轻。</li>
+
+</ul>
+</li>
+
+<li><strong>眼压波动（需排查青光眼）</strong>
+
+<ul>
+
+<li>表现特点：部分中老年女性在疲劳、生病或情绪紧张时，容易诱发急性闭角型青光眼的早期发作，典型表现就是眼睛一胀一胀地疼，同时伴随同侧偏头痛、耳朵附近胀痛。如果点滴里用了脱水降眼压或激素类抗炎药，眼痛也可能暂时缓解。</li>
+
+</ul>
+</li>
+
+</ul>
+
+<h2>二、 现阶段需要注意什么？</h2>
+
+<p>虽然眼睛疼减轻是好现象，但因为耳朵的病因还没最终敲定，接下来几天仍需仔细观察：</p>
+
+<ul>
+
+<li>留意皮肤和口腔变化：每天在光线好的地方看看耳廓、外耳道口、眼周额头以及嗓子软腭处，有没有冒出红色丘疹或透明小水疱。一旦出现，基本可以确诊为带状疱疹。</li>
+
+<li>关注视力与面部动作：留意看东西有没有模糊、看灯光有彩虹圈（虹视），或者洗脸、闭眼时两边脸是否对称。如果有视力模糊，建议顺便去眼科测一下眼压。</li>
+
+<li>饮食与润嗓建议：结合你上一个问题，目前依然不建议盲目大量喝胖大海。既然正在输液治疗，嗓子疼期间尽量多喝温开水、清淡饮食，避免辛辣刺激，让咽喉黏膜自然恢复即可。</li>
+
+</ul>
+
+<p>为了进一步帮你缩小可能的原因，你可以观察并告诉我：</p>
+
+<ul>
+
+<li>这几处疼痛（耳朵、眼睛、嗓子）是不是都集中在同一侧（比如全在左边或全在右边）？</li>
+
+<li>母亲现在看东西是否清楚，有没有眼红、流泪或怕光的情况？</li>
+
+</ul>
+
+<p>了解这些信息后，我可以帮你判断下一步更适合去耳鼻喉科、皮肤科还是眼科排查。</p>
+
+</div>
+</section>
+
+<!-- USER MESSAGE 3 -->
+
+<section class="message user">
+
+<div class="user-panel">
+
+<div class="user-card">
+
+<div class="user-content">
+
+<p>那 除了 胖大海 还 喝什么 可以 润喉 缓解 嗓子疼 ？</p>
+
+</div>
+
+<button class="user-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-label="展开完整消息">
+
+<svg viewBox="0 0 24 24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path d="m6 9 6 6 6-6"/>
+
+</svg>
+
+</button>
+
+</div>
+</div>
+</section>
+
+<!-- GEMINI RESPONSE 3 -->
+
+<section class="message gemini">
+
+<aside class="gemini-rail">
+
+<div class="gemini-logo">
+
+<svg viewBox="0 0 48 48"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <path fill="#4285F4"
+    d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+
+    <path fill="#34A853"
+    d="M24 44c5.4 0 10-1.8 13.4-4.8l-6.7-5.1c-1.8 1.2-4 1.9-6.7 1.9-5.1 0-9.4-3.4-10.9-8H6.2v5.3A20 20 0 0 0 24 44z"/>
+
+    <path fill="#FBBC05"
+    d="M13.1 28a12 12 0 0 1 0-7.9v-5.3H6.2a20 20 0 0 0 0 18.5l6.9-5.3z"/>
+
+    <path fill="#EA4335"
+    d="M24 12.1c2.9 0 5.5 1 7.5 3l5.7-5.7C33.7 6.1 29.3 4 24 4A20 20 0 0 0 6.2 14.8l6.9 5.3c1.5-4.6 5.8-8 10.9-8z"/>
+
+</svg>
+
+</div>
+
+<span class="gemini-rail-label">GEMINI</span>
+
+</aside>
+
+<div class="gemini-main">
+
+<div class="gemini-heading">
+
+<span class="gemini-heading-name">Gemini</span>
+
+<span class="gemini-heading-divider"></span>
+
+<span class="gemini-heading-type">AI Response</span>
+
+</div>
+
+<p>除了胖大海，温白开水、罗汉果茶、淡蜂蜜水或淡盐水漱口都是更温和、安全的润喉选择，尤其适合你母亲目前正在输液排查病因的阶段。</p>
+
+<p>因为她同时存在耳朵疼、眼睛胀痛的病史，选择润喉饮品时应尽量避开药性过强、过寒的草药，优先选性质平和、不干扰临床治疗的方法：</p>
+
+<h2>一、 温和安全的润喉饮品</h2>
+
+<ul>
+
+<li><strong>温白开水（最推荐）：</strong>
+
+<ul>
+
+<li>作用：直接湿润干燥发炎的咽喉黏膜，稀释局部炎性分泌物，没有任何副作用，也不会与点滴药物冲突。</li>
+
+<li>喝法：水温控制在 40℃ 左右，不要喝太烫的水（烫水会加重黏膜充血），每次小口慢咽，勤喝多饮。</li>
+
+</ul>
+</li>
+
+<li><strong>罗汉果泡水：</strong>
+
+<ul>
+
+<li>作用：清热润肺、利咽生津，润喉效果很好，且相比胖大海更温和、不伤肠胃，自带清甜口感。</li>
+
+<li>喝法：每次取 1/4 到半个罗汉果，捏碎外壳和果肉后用沸水冲泡。注意罗汉果甜度较高，糖尿病患者不建议饮用。</li>
+
+</ul>
+</li>
+
+<li><strong>温蜂蜜水或雪梨水：</strong>
+
+<ul>
+
+<li>作用：蜂蜜能在咽喉表面形成一层保护膜，减轻吞咽时的摩擦疼痛；炖煮的雪梨水则能生津润燥。</li>
+
+<li>喝法：用 40℃ 以下的温水冲调一勺蜂蜜（水温过高会破坏活性成分），或用雪梨去核切块加水煮 15 分钟喝汤。同样需注意血糖偏高者慎用。</li>
+
+</ul>
+</li>
+
+<li><strong>麦冬或金银花泡水（视情况选）：</strong>
+
+<ul>
+
+<li>作用：如果觉得口干舌燥明显，可用麦冬 5～8 粒泡水滋阴润燥；如果伴随明显咽喉红肿、黄痰，可用少量金银花泡水。金银花也偏寒，脾胃虚弱者少喝。</li>
+
+</ul>
+</li>
+
+</ul>
+
+<h2>二、 非饮用类的物理缓解方法</h2>
+
+<ul>
+
+<li><strong>温淡盐水漱口：</strong>
+
+<ul>
+
+<li>在一杯温开水中加入少量食盐（尝起来有淡淡咸味即可），仰头让盐水充分接触咽喉深处，咕噜咕噜漱口 15～30 秒后吐掉，每天 3～4 次。这能有效减轻咽部黏膜水肿并减少细菌滋生，还不会喝进肚子里增加负担。</li>
+
+</ul>
+</li>
+
+<li><strong>保持室内空气湿润：</strong>
+
+<ul>
+
+<li>干燥的空气会加重嗓子痛，可以在房间里使用加湿器（保持湿度在 50%～60% 左右），或放一盆清水。</li>
+
+</ul>
+</li>
+
+</ul>
+
+<h2>三、 饮食避坑提醒</h2>
+
+<ul>
+
+<li>嗓子疼期间，严禁喝太烫的汤水、浓茶、咖啡、酒精，也不要吃辛辣、油炸、过咸或过硬的食物（如坚果、饼干），以免进一步刺激或划伤咽喉黏膜。</li>
+
+</ul>
+
+<p>你母亲平时有没有糖尿病或胃寒怕冷的情况？告诉我这些，我可以帮她从上面挑出最合适的一种润喉方案。</p>
+
+</div>
+</section>
+
+</div>
+
+<footer class="footer">
+Gemini Conversation · Family Health Discussion · 2026
+</footer>
+
+</main>
+
+<script>
+/* =========================
+   用户消息折叠与展开
+========================= */
+
+document.querySelectorAll(".user-toggle").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const card = button.closest(".user-card");
+
+        const expanded = card.classList.toggle("expanded");
+
+        button.setAttribute(
+            "aria-expanded",
+            String(expanded)
+        );
+
+        button.setAttribute(
+            "aria-label",
+            expanded ? "收起完整消息" : "展开完整消息"
+        );
+
+    });
+
+});
+
+/* =========================
+   键盘操作支持
+========================= */
+
+document.querySelectorAll(".user-toggle").forEach(button => {
+
+    button.addEventListener("keydown", event => {
+
+        if (event.key === "Enter" || event.key === " ") {
+
+            event.preventDefault();
+
+            button.click();
+
+        }
+
+    });
+
+});
+</script>
+
+</body>
+</html>
